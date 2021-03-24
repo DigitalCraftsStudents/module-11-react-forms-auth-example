@@ -1,6 +1,7 @@
 
 import React from 'react';
 import './App.css';
+import LoginForm from './components/LoginForm';
 import AuthService from "./lib/AuthService";
 
 class App extends React.Component {
@@ -11,7 +12,7 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        {/* Login form will go here */}
+        <LoginForm />
       </div>
     );
   }
