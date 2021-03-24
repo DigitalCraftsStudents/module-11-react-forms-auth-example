@@ -17,7 +17,7 @@ export default class AuthService {
    * Login to fake auth service
    * @param {string} username
    * @param {string} password
-   * @returns {Promise<AuthResponse | null>} login status
+   * @returns {Promise<AuthResponse>} login status
    */
   login(username, password) {
     console.log('checking credentials');
@@ -77,7 +77,7 @@ export default class AuthService {
  * @typedef {Object} AuthResponse
  * @property {boolean} isValid
  * @property {string} message
- * @prop {UserObject} user
+ * @property {UserObject=} user
  */
 
 /**
