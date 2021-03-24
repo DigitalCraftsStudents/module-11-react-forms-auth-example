@@ -10,6 +10,7 @@ class App extends React.Component {
     super(props);
     this.state = {
       user: null,
+      error: null,
     };
   }
 
@@ -18,7 +19,12 @@ class App extends React.Component {
       .then((status) => {
         if (status.isValid) {
           this.setState({
-            user: authService.getUser()
+            user: authService.getUser(),
+            error: null
+          })
+        } else {
+          this.setState({
+            error: status.message
           })
         }
       });
@@ -31,6 +37,9 @@ class App extends React.Component {
           <h1>{this.state.user.name}</h1>
         ) : (
           <LoginForm handleSubmit={this.checkCredentials} />
+        )}
+        { this.state.error && (
+          <h3 style={{ color: 'red' }}>{this.state.error}</h3>
         )}
       </div>
     );
