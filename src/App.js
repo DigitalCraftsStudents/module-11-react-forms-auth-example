@@ -1,18 +1,37 @@
-
 import React from 'react';
 import './App.css';
 import LoginForm from './components/LoginForm';
-import AuthService from "./lib/AuthService";
+import AuthService from './lib/AuthService';
+
+const authService = new AuthService();
 
 class App extends React.Component {
-  checkCredentials(username, password) {
-    AuthService.login(username, password)
+  constructor(props) {
+    super(props);
+    this.state = {
+      user: null,
+    };
+  }
+
+  checkCredentials = (username, password) => {
+    authService.login(username, password)
+      .then((status) => {
+        if (status.isValid) {
+          this.setState({
+            user: authService.getUser()
+          })
+        }
+      });
   }
 
   render() {
     return (
       <div className="App">
-        <LoginForm />
+        {this.state.user !== null ? (
+          <h1>{this.state.user.name}</h1>
+        ) : (
+          <LoginForm handleSubmit={this.checkCredentials} />
+        )}
       </div>
     );
   }

@@ -4,6 +4,7 @@
 export default class AuthService {
   credentials = {
     huxley: {
+      name: 'Aldous',
       password: 's3kr3t'
     }
   }
@@ -24,14 +25,14 @@ export default class AuthService {
         // If we found a user in this.credentials 
         // and the passwords match.
         this.user = userObj;
-        Promise.resolve({
+        return Promise.resolve({
             isValid: true,
             message: 'Login successful'
         });
     } else {
         // We couldn't find a user with that username
         // or the passwords didn't match.
-        Promise.resolve({
+        return Promise.resolve({
             isValid: false,
             message: 'Bad username or password'
         });
@@ -45,7 +46,7 @@ export default class AuthService {
   logout() {
     this.user = null;
 
-    Promise.resolve({
+    return Promise.resolve({
       message: 'Logged out successfully'
     });
   }
